@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Departamento Detalle
+{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+    <section>
+        <h1>{{ apartment.Name }}</h1>
+        <p>{{ apartment.Barrio }}</p>
+        <p>{{ apartment.N_Camas }}</p>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'AdobeFont';
+    src: url('../fonts/Adobe - Acumin Pro ExtraCondensed Bold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'HelveticaFont';
+    src: url('../fonts/HelveticaNeueLTStd-Roman.otf') format('opentype');
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'AdobeFont', sans-serif;
+}
+
+a {
+    text-decoration: none; 
+    color: inherit;
+}
+
+/* .container.mt-4 {
+    margin-top: 0rem !important;
+} */

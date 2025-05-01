@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home - My Site
+{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero position-relative">
+    <img src="{% static 'images/casa_banner.jpg' %}" class="img-fluid w-100" style="height: 600px; object-fit: cover;">
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+        <h1 class="display-1 fw-bold">HOME EXPERIENCE, HOTEL QUALITY</h1>
+        <p class="lead">The Best of Both Worlds</p>
+
+        <!-- Search Bar -->
+        <div class="input-group mt-4 w-75 mx-auto">
+
+            <input type="text" class="form-control" placeholder="Ciudad, destino...">
+            <input type="date" class="form-control">
+            <input type="date" class="form-control">
+
+            <!-- Dropdown for Huéspedes -->
+            <div class="dropdown">
+                <button class="form-control bg-white text-dark text-start dropdown-toggle" type="button" id="guestDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false" style="border: 1px solid #ced4da;">
+                    <i class="bi bi-person me-2"></i> Número de huéspedes
+                </button>
+                <div class="dropdown-menu p-3 shadow" style="min-width: 250px; background-color: white; color: black;">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span>Adultos</span>
+                        <div class="input-group" style="width: 110px;">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateGuest('adult', -1)">−</button>
+                            <input type="text" id="guest-adult" class="form-control text-center" value="1" readonly>
+                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateGuest('adult', 1)">+</button>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span>Niños</span>
+                        <div class="input-group" style="width: 110px;">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateGuest('child', -1)">−</button>
+                            <input type="text" id="guest-child" class="form-control text-center" value="1" readonly>
+                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateGuest('child', 1)">+</button>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>Mascotas</span>
+                        <div class="input-group" style="width: 110px;">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateGuest('pet', -1)">−</button>
+                            <input type="text" id="guest-pet" class="form-control text-center" value="1" readonly>
+                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateGuest('pet', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary">Buscar</button>
+        </div>
+    </div>
+</section>
+
+<!-- Destinations -->
+<section class="container py-5">
+    <h2 class="mb-4">DISCOVER OUR DESTINATIONS</h2>
+
+    <div id="destinationCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="{% static 'images/colombia.png' %}" class="d-block w-100 rounded" alt="Colombia">
+                        <h5 class="text-center mt-2">COLOMBIA</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <img src="{% static 'images/mexico.png' %}" class="d-block w-100 rounded" alt="Mexico">
+                        <h5 class="text-center mt-2">MÉXICO</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <img src="{% static 'images/peru.png' %}" class="d-block w-100 rounded" alt="Peru">
+                        <h5 class="text-center mt-2">PERÚ</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <img src="{% static 'images/panama.png' %}" class="d-block w-100 rounded" alt="Panama">
+                        <h5 class="text-center mt-2">PANAMÁ</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <img src="{% static 'images/espana1.png' %}" class="d-block w-100 rounded" alt="España">
+                        <h5 class="text-center mt-2">ESPAÑA</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <img src="{% static 'images/usa.png' %}" class="d-block w-100 rounded" alt="España">
+                        <h5 class="text-center mt-2">USA</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="{% static 'images/espana1.png' %}" class="d-block w-100 rounded" alt="Italia">
+                        <h5 class="text-center mt-2">ITALIA</h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- You can add more carousel-item blocks if you want more slides -->
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#destinationCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#destinationCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+
+{% endblock %}

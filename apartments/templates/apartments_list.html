@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Departamentos Lista
+{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+    <section>
+        <h1>apartments list</h1>
+
+        {% for ap in apartments %}
+        <article>
+            {% comment %} {% if ap.Name %}
+                <a href="{% url 'apartments:detail' apartment_id=ap.id %}">Ver más</a>
+            {% else %}
+                <span style="color: red;">missing</span>
+            {% endif %} {% endcomment %}
+
+            <a href="{% url 'apartments:detail' apartment_id=ap.id %}">
+                <h2>{{ ap.Name }}</h2>
+            </a>
+            <p>{{ ap.Barrio }}</p>
+        </article>
+        {% endfor %}
+
+    </section>
+
+{% endblock %}
