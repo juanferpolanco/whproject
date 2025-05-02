@@ -29,26 +29,24 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'apartments:list' %}">Departamentos</a></li>
                     {% comment %} <li class="nav-item"><a class="nav-link" href="#">¿Eres propietario?</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Eventos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Inversión Inmobiliaria</a></li>
-                    <li class="nav-item"><a class="btn btn-dark ms-3" href="#">Iniciar sesión</a></li> {% endcomment %}
+                    <li class="nav-item"><a class="nav-link" href="#">Inversión Inmobiliaria</a></li>{% endcomment %}
+                    {% comment %} <li class="nav-item"><a class="btn btn-dark ms-3" href="{% url 'users:login' %}">Iniciar sesión</a></li>  {% endcomment %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'users:register' %}">Crear Cuenta</a></li> 
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Main content -->
     <main class="container mt-4">
         {% block content %}
-        <!-- Pages will inject their own content here -->
+
         {% endblock %}
     </main>
 
-    <!-- Footer -->
     <footer class="text-center mt-5 mb-3">
-        <p>&copy; 2025 My Site</p>
+        <p>WH - Footer</p>
     </footer>
 
-    <!-- JS -->
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
 </body>
