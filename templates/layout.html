@@ -1,21 +1,17 @@
-<!-- templates/base.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}My Site{% endblock %}</title>
 
-    <!-- Load static files -->
     {% load static %}
 
-    <!-- CSS -->
     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">
@@ -26,16 +22,27 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'apartments:list' %}">Departamentos</a></li>
-                    {% comment %} <li class="nav-item"><a class="nav-link" href="#">¿Eres propietario?</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Eventos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Inversión Inmobiliaria</a></li>{% endcomment %}
-                    {% comment %} <li class="nav-item"><a class="btn btn-dark ms-3" href="{% url 'users:login' %}">Iniciar sesión</a></li>  {% endcomment %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'users:register' %}">Crear Cuenta</a></li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'apartments:list' %}">Departamentos</a>
+                    </li>
+    
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:logout' %}">Cerrar sesión</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:login' %}">Iniciar sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:register' %}">Crear Cuenta</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
+    
 
     <main class="container mt-4">
         {% block content %}

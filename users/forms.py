@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 class CustomUserCreationForm(UserCreationForm):
@@ -60,6 +60,8 @@ class CustomUserCreationForm(UserCreationForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
+        # if email and not email.endswith("@example.com"):
+        #     self.add_error('email', 'El correo debe ser del dominio @example.com.')
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError('Este correo ya está registrado.')
         return email
@@ -68,11 +70,10 @@ class CustomUserCreationForm(UserCreationForm):
         cleaned_data = super().clean()
         password1 = cleaned_data.get('password1')
         password2 = cleaned_data.get('password2')
-
         if password1 and password2 and password1 != password2:
             self.add_error('password2', 'Las contraseñas no coinciden.')
-        
         return cleaned_data
+    
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -82,3 +83,21 @@ class CustomUserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(
+        max_length=150,
+        required=True,
+        widget=forms.TextInput(attrs={'autofocus': True}),
+        error_messages={
+            'required': 'Por favor, ingresa tu nombre de usuario o correo.',
+        }
+    )
+    password = forms.CharField(
+        label='Contraseña',
+        strip=False,
+        widget=forms.PasswordInput,
+        error_messages={
+            'required': 'Por favor, ingresa tu contraseña.',
+        }
+    )

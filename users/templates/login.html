@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Iniciar sesión
+{% endblock %}
+
+{% block content %}
+    <div class="login-container" style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+        <h1 style="text-transform: uppercase; font-weight: bold;">Iniciar sesión</h1>
+        <p>Ingresa tus credenciales para acceder a tu cuenta.</p>
+
+        <form method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+            {% csrf_token %}
+
+            <!-- Nombre de usuario o correo -->
+            <label for="id_username">Nombre de usuario o correo</label>
+            <input 
+                type="text" 
+                name="username" 
+                id="id_username"
+                placeholder="Tu nombre de usuario o correo"
+                value="{{ form.username.value|default_if_none:'' }}"
+                style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;"
+            >
+            {% if form.username.errors %}
+                <div style="color: red; font-size: 0.9em;">
+                    {% for error in form.username.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Contraseña -->
+            <label for="id_password">Contraseña</label>
+            <input 
+                type="password" 
+                name="password" 
+                id="id_password"
+                placeholder="Ingresa tu contraseña"
+                style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;"
+            >
+            {% if form.password.errors %}
+                <div style="color: red; font-size: 0.9em;">
+                    {% for error in form.password.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Submit button -->
+            <button 
+                type="submit" 
+                style="padding: 10px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;"
+            >
+                Iniciar sesión
+            </button>
+        </form>
+
+        <!-- Non-field errors (general form errors) -->
+        {% if form.non_field_errors %}
+            <div style="color: red; margin-top: 10px; font-size: 0.9em;">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% comment %} <div style="margin-top: 10px; font-size: 0.9em;">
+            <a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+        </div> {% endcomment %}
+    </div>
+{% endblock %}
