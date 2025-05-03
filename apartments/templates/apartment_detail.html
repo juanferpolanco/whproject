@@ -1,17 +1,89 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Departamento Detalle
+    {{ apartment.Name }}
 {% endblock %}
 
-{% load static %}
-
 {% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="mb-4">
+                {% comment %} <img src="{% static 'images/apartment-placeholder.jpg' %}" class="img-fluid w-100 mb-3" alt="{{ apartment.Name }}">
+                <div class="d-flex gap-2">
+                    <img src="{% static 'images/apartment-placeholder.jpg' %}" class="img-thumbnail" style="width: 100px;" alt="Thumbnail 1">
+                    <img src="{% static 'images/apartment-placeholder.jpg' %}" class="img-thumbnail" style="width: 100px;" alt="Thumbnail 2">
+                    <img src="{% static 'images/apartment-placeholder.jpg' %}" class="img-thumbnail" style="width: 100px;" alt="Thumbnail 3">
+                </div> {% endcomment %}
+            </div>
+            <h2 class="fw-bold">{{ apartment.Name }}</h2>
+            <p class="text-muted">{{ apartment.Barrio }}, {{ apartment.Ciudad }}, {{ apartment.Pais }}</p>
+            <p>
+                {{ apartment.N_Personas }} invitados |
+                1 habitación |
+                {{ apartment.N_Camas }} cama(s) |
+                {{ apartment.N_Banos }} baño(s)
+            </p>
+            <hr>
+            <p>
+                Lorem ipsum dolor sit amet consectetur. Quam viverra vel convallis amet iaculis. 
+                Id mi velit eget volutpat scelerisque. Sapien sed nibh malesuada bibendum pharetra.
+            </p>
+            <hr>
+            <h4>Amenities</h4>
+            <div class="d-flex flex-wrap gap-4 my-3">
+                <div class="text-center">
+                    <i class="bi bi-elevator"></i><br>Elevator
+                </div>
+                <div class="text-center">
+                    <i class="bi bi-car-front"></i><br>Indoor Parking
+                </div>
+                <div class="text-center">
+                    <i class="bi bi-tv"></i><br>TV
+                </div>
+                <div class="text-center">
+                    <i class="bi bi-person-bounding-box"></i><br>Doorman
+                </div>
+                <div class="text-center">
+                    <i class="bi bi-tree"></i><br>Patio or Balcony
+                </div>
+                <div class="text-center">
+                    <i class="bi bi-fire"></i><br>BBQ Grill
+                </div>
+            </div>
+            <hr>
+            <h4>Bedrooms</h4>
+            <p>Bedroom 1: 1 Queen Bed</p>
+        </div>
 
-    <section>
-        <h1>{{ apartment.Name }}</h1>
-        <p>{{ apartment.Barrio }}</p>
-        <p>{{ apartment.N_Camas }}</p>
-    </section>
-
+        <div class="col-lg-4">
+            <div class="border rounded p-4 shadow-sm">
+                <div class="d-flex justify-content-between mb-3">
+                    <span class="fw-bold">DIARIO</span>
+                    <span>US$ 83.00 POR NOCHE</span>
+                </div>
+                <form>
+                    <div class="mb-3">
+                        <label for="dates" class="form-label">Llegada - Salida</label>
+                        <input type="text" id="dates" class="form-control" placeholder="May 1/23 - Jun 3/23">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input type="email" id="email" class="form-control" placeholder="tu@email.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Teléfono</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="+57">
+                    </div>
+                    <div class="mb-3">
+                        <label for="discount" class="form-label">Código de descuento</label>
+                        <input type="text" id="discount" class="form-control">
+                    </div>
+                    {% comment %} <button type="submit" class="btn btn-dark w-100">RESERVAR AHORA</button> {% endcomment %}
+                    <a href="{% url 'reservations:detail' %}" class="btn btn-dark w-100">RESERVAR AHORA</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

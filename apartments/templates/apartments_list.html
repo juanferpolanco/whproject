@@ -1,31 +1,38 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Departamentos Lista
+    Lista de Apartamentos
 {% endblock %}
 
-{% load static %}
-
 {% block content %}
-
-    <section>
-        <h1>apartments list</h1>
-
-        {% for ap in apartments %}
-        <article>
-            {% comment %} {% if ap.Name %}
-                <a href="{% url 'apartments:detail' apartment_id=ap.id %}">Ver más</a>
-            {% else %}
-                <span style="color: red;">missing</span>
-            {% endif %} {% endcomment %}
-
-            <a href="{% url 'apartments:detail' apartment_id=ap.id %}">
-                <h2>{{ ap.Name }}</h2>
+<div class="container">
+    <div class="row">
+        {% for apartment in apartments %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a href="{% url 'apartments:detail' apartment_id=apartment.id %}" style="text-decoration: none; color: inherit;">
+                <div class="card shadow-sm h-100">
+                    {% comment %} <img src="{% static 'images/apartment-placeholder.jpg' %}" class="card-img-top" alt="Imagen de {{ apartment.Name }}"> {% endcomment %}
+                    
+                    <div class="card-body">
+                        <h3 class="card-title">{{ apartment.Name }}</h3>
+                        <p class="card-text">
+                            {{ apartment.Barrio }}, {{ apartment.Ciudad }}, {{ apartment.Pais }}
+                        </p>
+                        <p class="card-text">
+                            <strong>US$ 120</strong> / Noche
+                        </p>
+                        <div class="d-flex justify-content-between">
+                            <span>👥 {{ apartment.N_Personas }}</span>
+                            <span>🛁 {{ apartment.N_Banos }}</span>
+                            <span>🛏 {{ apartment.N_Camas }}</span>
+                        </div>
+                    </div>
+                </div>
             </a>
-            <p>{{ ap.Barrio }}</p>
-        </article>
+        </div>
+        {% empty %}
+        <p>No hay apartamentos disponibles.</p>
         {% endfor %}
-
-    </section>
-
+    </div>
+</div>
 {% endblock %}
