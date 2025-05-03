@@ -51,7 +51,34 @@
     </main>
 
     <footer class="text-center mt-5 mb-3">
-        <p>WH - Footer</p>
+        <!-- Search Section --> 
+        <section class="search-section">
+            <div class="search-logo">
+              <img src="{% static 'images/logo.svg' %}" alt="Wynwood House Logo">
+            </div>
+          
+            <div class="search-fields">
+              <div class="search-item">
+                <span class="icon">🔍</span>
+                <div class="label">DESTINO</div>
+                <div class="value">Lima, Perú</div>
+              </div>
+          
+              <div class="search-item">
+                <span class="icon">📅</span>
+                <div class="label">LLEGADA - SALIDA</div>
+                <div class="value">Agregar fechas</div>
+              </div>
+          
+              <div class="search-item">
+                <span class="icon">👤</span>
+                <div class="label">HUÉSPEDES</div>
+                <div class="value">2 Huéspedes</div>
+              </div>
+          
+              <button class="search-button">BUSCAR</button>
+            </div>
+        </section>
     </footer>
 
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>

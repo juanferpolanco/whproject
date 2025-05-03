@@ -12,6 +12,10 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'AdobeFont', sans-serif;
 }
 
+p {
+    font-family: 'HelveticaFont', sans-serif;
+}
+
 a {
     text-decoration: none; 
     color: inherit;
@@ -20,3 +24,485 @@ a {
 /* .container.mt-4 {
     margin-top: 0rem !important;
 } */
+
+/* Hero Section */
+
+.hero h1.display-1 {
+    font-size: 100px;           /* reduce from 80px to 60px (adjust if needed) */
+    white-space: nowrap;       /* force to stay on one line */
+    width: 100%;               /* full width */
+    max-width: 100%;           /* ensure no container cuts it off */
+    overflow: hidden;          /* hide overflow if it goes out */
+    text-align: center;        /* center text */
+}
+
+.hero .position-absolute {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 20px;           /* optional, add some horizontal padding */
+}
+
+/* Featured Properties*/
+
+.featured-properties {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 40px;
+    background-color: #F9F7F5
+  }
+  
+  .properties-text {
+    flex: 1;
+  }
+  
+  .properties-text h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .properties-text p {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .properties-cards {
+    flex: 2;
+    display: flex;
+    gap: 24px;
+  }
+  
+  .property-card {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .property-card img {
+    width: 100%;
+    height: 100%;
+    filter: brightness(80%);
+    /* border-radius: 8px; */
+  }
+  
+  .property-info {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+  }
+  
+  
+/* Services */
+
+.column-servicesimages {
+    float: left;
+    width: 70%;
+    gap: 20px; 
+}
+
+.column-servicestext {
+    float: left;
+    width: 30%;
+}
+
+.column-servicestext h2{
+    font-size: 40px;
+}
+
+.column-servicestext p{
+    font-size: 14px;
+}
+
+.row-services {
+    display: flex;
+    gap: 35px; 
+  }
+
+.row-services:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.servicesimages-grid {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px; 
+}
+
+.service-item {
+    text-align: left;
+}
+
+.service-item img {
+    width: 100%;
+    height: 68%;
+    /* border-radius: 8px; */
+}
+
+.service-label {
+    margin-top: 10px;
+    font-size: 14px;
+    letter-spacing: 6px;
+}
+
+/* Event */
+.events-section {
+    display: flex;
+    width: 100%;
+    /* height: auto; */
+    height: 700px;
+  }
+  
+  .events-images {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .events-images img {
+    width: 250px;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .events-content {
+    flex: 1;
+    background-color: #f6a600; /* strong yellow-orange */
+    color: black;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .events-content h2 {
+    font-size: 55px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .events-content p {
+    font-size: 18px;
+    margin-bottom: 25px;
+  }
+  
+  .events-content button {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .events-content button:hover {
+    background-color: #333;
+  }
+
+/* Benefits */
+.benefits-section {
+    padding: 20px;
+    padding-bottom: 80px;
+  }
+
+  .benefits-section h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .benefit-card-text {
+    position: relative;
+    background-color: #f8f8f8;
+    padding: 30px;
+    /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+    text-align: left;
+  }
+
+  .benefit-card-text p {
+    font-size: 17px;
+    /* margin-bottom: 15px; */
+  }
+
+  .benefit-card {
+    position: relative;
+    background-color: #f8f8f8;
+    padding: 0px;
+    /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+    text-align: left;
+  }
+
+  .benefit-card img {
+    width: 100%;
+    height: 100%;
+    /* border-radius: 4px; */
+    filter: brightness(70%);
+  }
+
+  .benefit-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+  }
+
+  .benefit-card p {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .benefit-card-text button {
+    padding: 8px 16px;
+    border: 1px solid black;
+    background: none;
+    cursor: pointer;
+    border-radius: 20px;
+  }
+
+  .benefit-overlay {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); */
+    font-family: 'AdobeFont', sans-serif;
+    width: 60%;
+    line-height: 0.8;
+    padding-bottom: 20px;
+  }
+
+/* Collection */
+.collection-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .collection-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .collection-card img {
+    width: 655.88px;
+    height: 707.72px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(60%); /* darken the image slightly */
+  }
+
+  .collection-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    width: 100%; /* allow it to stretch across the image */
+    padding: 0 20px; /* optional, to prevent text from hitting edges */
+    box-sizing: border-box;
+  }
+  
+  .collection-text h2 {
+    font-size: 70px;
+    margin: 0;               
+    line-height: 0.8;        
+  }
+  
+  .collection-text p {
+    font-size: 27px;
+    margin: 5px 0 0 0;       
+  }
+
+/* Long Term */
+.long-term-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    gap: 40px;
+  }
+
+  .long-term-image img {
+    width: 455.62px;
+    height: 603px;
+    display: block;
+    object-fit: cover;
+    /* border-radius: 8px; */
+  }
+
+  .long-term-content {
+    max-width: 600px;
+  }
+
+  .long-term-content h2 {
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 0px;
+  }
+
+  .long-term-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .long-term-content a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+
+  .long-term-content a:hover {
+    background-color: #333;
+  }
+
+/* Real State */
+.real-estate-section {
+    position: relative;
+    width: 100%;
+    height: 550px;
+    background-image: url('../images/realstate.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    color: white;
+    padding: 40px;
+  }
+
+  .real-estate-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .real-estate-content h1 {
+    font-size: 42px;
+    font-weight: bold;
+    margin: 0 0 0px 0;
+  }
+
+  .real-estate-content p {
+    font-size: 14px;
+    margin: 0 0 20px 0;
+  }
+
+  .real-estate-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid white;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .real-estate-button:hover {
+    background: white;
+    color: black;
+  }
+
+  .real-estate-logo {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+  }
+
+  .real-estate-logo img {
+    width: 150px;
+    height: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  .real-estate-text {
+    max-width: 600px;
+  }
+
+/* Media Logos */
+.media-logos-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; /* spacing between logos */
+    padding: 40px 0;
+  }
+  
+  .media-logos-section img {
+    width: 200px;   /* consistent width */
+    height: 50px;   /* consistent height */
+    object-fit: contain;
+  }
+
+/* Search Section*/
+.search-section {
+    background-color: #d6edf1; /* light blue */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    flex-wrap: wrap;
+  }
+  
+  .search-logo img {
+    height: 40px;
+  }
+  
+  .search-fields {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .search-item {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid black;
+    padding: 0 10px;
+  }
+  
+  .search-item .label {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  
+  .search-item .value {
+    font-size: 14px;
+  }
+  
+  .search-button {
+    padding: 8px 16px;
+    border: 1px solid black;
+    background: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .search-button:hover {
+    background-color: black;
+    color: white;
+  }

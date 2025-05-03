@@ -13,50 +13,50 @@
     <img src="{% static 'images/casa_banner.jpg' %}" class="img-fluid w-100" style="height: 600px; object-fit: cover;">
     <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
         <h1 class="display-1 fw-bold">HOME EXPERIENCE, HOTEL QUALITY</h1>
-        <p class="lead">The Best of Both Worlds</p>
+        <p class="lead">BEST OF BOTH WORLDS</p>
 
         <!-- Search Bar -->
-        <div class="input-group mt-4 w-75 mx-auto">
-
-            <input type="text" class="form-control" placeholder="Ciudad, destino...">
-            <input type="date" class="form-control">
-            <input type="date" class="form-control">
-
-            <!-- Dropdown for Huéspedes -->
-            <div class="dropdown">
-                <button class="form-control bg-white text-dark text-start dropdown-toggle" type="button" id="guestDropdown"
-                    data-bs-toggle="dropdown" aria-expanded="false" style="border: 1px solid #ced4da;">
-                    <i class="bi bi-person me-2"></i> Número de huéspedes
-                </button>
-                <div class="dropdown-menu p-3 shadow" style="min-width: 250px; background-color: white; color: black;">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span>Adultos</span>
-                        <div class="input-group" style="width: 110px;">
-                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateGuest('adult', -1)">−</button>
-                            <input type="text" id="guest-adult" class="form-control text-center" value="1" readonly>
-                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateGuest('adult', 1)">+</button>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span>Niños</span>
-                        <div class="input-group" style="width: 110px;">
-                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateGuest('child', -1)">−</button>
-                            <input type="text" id="guest-child" class="form-control text-center" value="1" readonly>
-                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateGuest('child', 1)">+</button>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span>Mascotas</span>
-                        <div class="input-group" style="width: 110px;">
-                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateGuest('pet', -1)">−</button>
-                            <input type="text" id="guest-pet" class="form-control text-center" value="1" readonly>
-                            <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateGuest('pet', 1)">+</button>
-                        </div>
-                    </div>
-                </div>
+        <div class="container my-4">
+            <div class="d-flex bg-light rounded-pill overflow-hidden shadow-sm align-items-center">
+              <!-- Ciudad dropdown -->
+              <div class="d-flex align-items-center px-3 border-end">
+                <i class="bi bi-search me-2"></i>
+                <select class="form-select border-0 bg-transparent">
+                  <option selected>Ciudad</option>
+                  <option value="lima">Lima</option>
+                  <option value="bogota">Bogotá</option>
+                  <option value="cartagena">Cartagena</option>
+                </select>
+              </div>
+          
+              <!-- Distrito dropdown -->
+              <div class="d-flex align-items-center px-3 border-end">
+                <i class="bi bi-flag me-2"></i>
+                <select class="form-select border-0 bg-transparent">
+                  <option selected>Distrito</option>
+                  <option value="centro">Centro</option>
+                  <option value="norte">Norte</option>
+                  <option value="sur">Sur</option>
+                </select>
+              </div>
+          
+              <!-- Date range picker -->
+              <div class="d-flex align-items-center px-3 border-end">
+                <i class="bi bi-calendar me-2"></i>
+                <input type="date" class="form-control border-0 bg-transparent" placeholder="Fecha inicio">
+                <span class="mx-2">/</span>
+                <input type="date" class="form-control border-0 bg-transparent" placeholder="Fecha fin">
+              </div>
+          
+              <!-- Huéspedes -->
+              <div class="d-flex align-items-center px-3 border-end">
+                <i class="bi bi-person me-2"></i>
+                <input type="number" class="form-control border-0 bg-transparent" placeholder="Número de huéspedes" min="1">
+              </div>
+          
+              <!-- Botón Buscar -->
+              <button class="btn btn-dark px-4">BUSCAR</button>
             </div>
-
-            <button class="btn btn-primary">Buscar</button>
         </div>
     </div>
 </section>
@@ -117,6 +117,182 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+</section>
+
+<!-- Featured Properties -->
+<section class="featured-properties">
+    <div class="properties-text">
+      <h2>PROPIEDADES DESTACADAS</h2>
+      <p>
+        Descubre nuestra selección exclusiva de propiedades y conoce tu destino preferido a tu manera.
+        Encuentra tu estadía ideal y empieza a vivir una experiencia única.
+      </p>
+    </div>
+  
+    <div class="properties-cards">
+      <div class="property-card">
+        <img src="{% static 'images/property1.png' %}" alt="Propiedad 1">
+        <div class="property-info">
+          <p class="title">Natural 1BR with Private Terrace in Cartagena</p>
+          <p class="price">US$ <strong>999</strong> Noche</p>
+          <p class="location">Bogotá - Colombia</p>
+        </div>
+      </div>
+      <div class="property-card">
+        <img src="{% static 'images/property2.png' %}" alt="Propiedad 2">
+        <div class="property-info">
+          <p class="title">Natural 1BR with Private Terrace in Cartagena</p>
+          <p class="price">US$ <strong>999</strong> Noche</p>
+          <p class="location">Bogotá - Colombia</p>
+        </div>
+      </div>
+    </div>
+</section>
+
+<br>
+
+<!-- Services -->
+<section class="container py-5">
+    <div class="row-services">
+        <div class="column-servicestext">
+            <h2 class="mb-4">SERVICIOS EN WYNWOOD HOUSE</h2>
+            <p>Descubre los servicios que ofrecen nuestras propiedades para hacer de tu estadía la experiencia más cómoda y emocionante que puedas imaginar.</p>
+        </div>
+        <div class="column-servicesimages">
+            <div class="servicesimages-grid">
+                <div class="service-item">
+                  <img src="{% static 'images/suite-door.png' %}" alt="Check in sin contacto">
+                  <div class="service-label">CHECK IN SIN CONTACTO</div>
+                </div>
+                <div class="service-item">
+                  <img src="{% static 'images/cleaning.png' %}" alt="Limpieza profesional">
+                  <div class="service-label">LIMPIEZA PROFESIONAL</div>
+                </div>
+                <div class="service-item">
+                  <img src="{% static 'images/wifi.png' %}" alt="Wifi">
+                  <div class="service-label">WIFI</div>
+                </div>
+                <div class="service-item">
+                  <img src="{% static 'images/bathroom.png' %}" alt="Kit de baño">
+                  <div class="service-label">KIT DE BAÑO</div>
+                </div>
+                <div class="service-item">
+                  <img src="{% static 'images/kitchen.png' %}" alt="Cocina equipada">
+                  <div class="service-label">COCINA EQUIPADA</div>
+                </div>
+                <div class="service-item">
+                  <img src="{% static 'images/pet.jpg' %}"alt="Pet friendly">
+                  <div class="service-label">PET FRIENDLY</div>
+                </div>
+                <div class="service-item">
+                  <img src="{% static 'images/support.jpg' %}" alt="Soporte 24/7">
+                  <div class="service-label">SOPORTE 24/7</div>
+                </div>
+                <div class="service-item">
+                  <img src="{% static 'images/bed.jpg' %}" alt="Cama Wynwood">
+                  <div class="service-label">CAMA WYNWOOD</div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+<!-- Event -->
+<section class="events-section">
+    <div class="events-images">
+      <img src="{% static 'images/pastries.png' %}" alt="Pastries">
+      <img src="{% static 'images/champagne.png' %}" alt="Champagne">
+    </div>
+  
+    <div class="events-content">
+      <h2>DISFRUTA DE NUESTROS EVENTOS!</h2>
+      <p>
+        Vive tu experiencia al máximo mientras te sumerges en el vibrante mundo de los eventos Wynwood.
+        Disfruta de arte, cultura e inspiración como nunca antes.
+      </p>
+      <button>VER TODOS LOS EVENTOS</button>
+    </div>
+</section>
+
+<!-- Benefits -->
+<section class="benefits-section">
+    <h2>BENEFICIOS DE WYNWOOD HOUSE</h2>
+    <div class="benefits-grid">
+        <!-- First Card (Text Box) -->
+        <div class="benefit-card-text">
+            <p style="font-size: 22px;">Guías de ciudades</p>
+            <p>Lorem ipsum dolor sit amet consectetur. Congue volutpat pulvinar mattis enim tellus. Ac habitasse enim adipiscing vitae massa pretium nulla dui.</p>
+            <button>SABER MÁS</button>
+            {% comment %} <a href="#" class="benefits-button">SABER MÁS</a> {% endcomment %}
+        </div>
+    
+        <!-- Second Card (Image with Overlay) -->
+        <div class="benefit-card">
+            <img src="{% static 'images/services.png' %}" alt="Servicios adicionales">
+            <div class="benefit-overlay">SERVICIOS ADICIONALES</div>
+        </div>
+    
+        <!-- Third Card (Image with Overlay) -->
+        <div class="benefit-card">
+            <img src="{% static 'images/rewards.png' %}" alt="Programa de rewards">
+            <div class="benefit-overlay">PROGRAMA DE REWARDS</div>
+        </div>
+        </div>
+</section>
+
+<!-- Collection -->
+<section class="collection-section">
+    <div class="collection-card">
+      <img src="{% static 'images/whhome.jpg' %}" alt="Casa Wynwood">
+      <div class="collection-text">
+        <h2>casa<br>wynwood *</h2>
+      </div>
+    </div>
+  
+    <div class="collection-card">
+      <img src="{% static 'images/collectionhome.png' %}" alt="The Collection">
+      <div class="collection-text">
+        <h2>THE COLLECTION *</h2>
+        <p>COMING SOON</p>
+      </div>
+    </div>
+  </section>
+
+ <!-- Long Term --> 
+<section class="long-term-section">
+<div class="long-term-image">
+    <img src="{% static 'images/whzuzu.png' %}" alt="Alquileres a largo plazo">
+</div>
+<div class="long-term-content">
+    <h2>ALQUILERES A LARGO PLAZO</h2>
+    <p>Descubre el confort y la conveniencia de hospedarte con nosotros durante períodos prolongados. Aprovecha nuestras tarifas especiales diseñadas exclusivamente para estadías largas, ofreciéndote una experiencia continua de calidad y comodidad.</p>
+    <a href="#">CONTÁCTANOS</a>
+</div>
+</section>
+
+<!-- Real State --> 
+<section class="real-estate-section">
+    <div class="real-estate-logo">
+      <img src="{% static 'images/logo.svg' %}" alt="Wynwood Real Estate">
+    </div>
+  
+    <div class="real-estate-content">
+        <div class="real-estate-text">
+          <h1>INVIERTE EN REAL ESTATE</h1>
+          <p>Compra o vende tu propiedad y obtén asesoramiento profesional y una experiencia sin estrés</p>
+        </div>
+        <a href="#" class="real-estate-button">SABER MÁS</a>
+    </div>
+</section>
+
+<!-- Media Logos --> 
+<section class="media-logos-section">
+    <img src="{% static 'images/voguelogo.png' %}" alt="Vogue">
+    <img src="{% static 'images/lbeautelogo.png' %}" alt="L'Beauté Homme">
+    <img src="{% static 'images/forbeslogo.png' %}" alt="Forbes">
+    <img src="{% static 'images/portafoliologo.png' %}" alt="Portafolio" style="height: 130px;">
+    <img src="{% static 'images/larepublicalogo.png' %}" alt="La República">
 </section>
 
 {% endblock %}
