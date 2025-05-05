@@ -8,6 +8,9 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <!-- Hero Section -->
 <section class="hero position-relative">
     <img src="{% static 'images/casa_banner.jpg' %}" class="img-fluid w-100" style="height: 600px; object-fit: cover;">
@@ -16,48 +19,77 @@
         <p class="lead">BEST OF BOTH WORLDS</p>
 
         <!-- Search Bar -->
-        <div class="container my-4">
-            <div class="d-flex bg-light rounded-pill overflow-hidden shadow-sm align-items-center">
-              <!-- Ciudad dropdown -->
-              <div class="d-flex align-items-center px-3 border-end">
-                <i class="bi bi-search me-2"></i>
-                <select class="form-select border-0 bg-transparent">
-                  <option selected>Ciudad</option>
-                  <option value="lima">Lima</option>
-                  <option value="bogota">Bogotá</option>
-                  <option value="cartagena">Cartagena</option>
-                </select>
-              </div>
-          
-              <!-- Distrito dropdown -->
-              <div class="d-flex align-items-center px-3 border-end">
-                <i class="bi bi-flag me-2"></i>
-                <select class="form-select border-0 bg-transparent">
-                  <option selected>Distrito</option>
-                  <option value="centro">Centro</option>
-                  <option value="norte">Norte</option>
-                  <option value="sur">Sur</option>
-                </select>
-              </div>
-          
-              <!-- Date range picker -->
-              <div class="d-flex align-items-center px-3 border-end">
-                <i class="bi bi-calendar me-2"></i>
-                <input type="date" class="form-control border-0 bg-transparent" placeholder="Fecha inicio">
-                <span class="mx-2">/</span>
-                <input type="date" class="form-control border-0 bg-transparent" placeholder="Fecha fin">
-              </div>
-          
-              <!-- Huéspedes -->
-              <div class="d-flex align-items-center px-3 border-end">
-                <i class="bi bi-person me-2"></i>
-                <input type="number" class="form-control border-0 bg-transparent" placeholder="Número de huéspedes" min="1">
-              </div>
-          
-              <!-- Botón Buscar -->
-              <button class="btn btn-dark px-4">BUSCAR</button>
+        <form class="d-flex bg-light rounded-pill shadow p-2 mt-4 align-items-center justify-content-between" style="max-width: 1100px; margin: auto;">
+            
+          <!-- Ciudad dropdown -->
+          <div class="dropdown d-flex align-items-center px-3 border-end">
+              <i class="bi bi-search me-2"></i>
+              <button class="btn dropdown-toggle p-0 bg-transparent" type="button" data-bs-toggle="dropdown">
+                  Ciudad
+              </button>
+              <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Lima</a></li>
+                  <li><a class="dropdown-item" href="#">Bogotá</a></li>
+                  <li><a class="dropdown-item" href="#">Cartagena</a></li>
+              </ul>
+          </div>
+
+          <!-- Distrito dropdown -->
+          <div class="dropdown d-flex align-items-center px-3 border-end">
+              <i class="bi bi-flag me-2"></i>
+              <button class="btn dropdown-toggle p-0 bg-transparent" type="button" data-bs-toggle="dropdown">
+                  Distrito
+              </button>
+              <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Centro</a></li>
+                  <li><a class="dropdown-item" href="#">Norte</a></li>
+                  <li><a class="dropdown-item" href="#">Sur</a></li>
+              </ul>
+          </div>
+
+          <!-- Date range picker -->
+          <div class="d-flex align-items-center px-3 border-end">
+            <i class="bi bi-calendar me-2"></i>
+            <input type="text" id="dateRange" class="form-control border-0 bg-transparent p-0" placeholder="Selecciona fechas" style="width: 220px;">
+          </div>
+
+          <!-- Número de huéspedes -->
+          <div class="dropdown d-flex align-items-center px-3 border-end">
+            <i class="bi bi-person me-2"></i>
+            <button class="btn dropdown-toggle p-0 bg-transparent" type="button" data-bs-toggle="dropdown">
+                Número de huéspedes
+            </button>
+            <div class="dropdown-menu p-3" data-bs-auto-close="outside">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span>Adultos</span>
+                    <div>
+                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="changeCount('adultos', -1)">-</button>
+                        <input type="text" id="adultos" value="1" class="text-center" style="width: 40px; border: none;">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="changeCount('adultos', 1)">+</button>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span>Niños</span>
+                    <div>
+                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="changeCount('ninos', -1)">-</button>
+                        <input type="text" id="ninos" value="1" class="text-center" style="width: 40px; border: none;">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="changeCount('ninos', 1)">+</button>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>Mascotas</span>
+                    <div>
+                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="changeCount('mascotas', -1)">-</button>
+                        <input type="text" id="mascotas" value="1" class="text-center" style="width: 40px; border: none;">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="changeCount('mascotas', 1)">+</button>
+                    </div>
+                </div>
             </div>
-        </div>
+          </div>
+
+          <!-- Botón Buscar -->
+          <button class="btn btn-dark rounded-pill px-4 py-2">BUSCAR</button>
+      </form>
     </div>
 </section>
 
@@ -294,5 +326,26 @@
     <img src="{% static 'images/portafoliologo.png' %}" alt="Portafolio" style="height: 130px;">
     <img src="{% static 'images/larepublicalogo.png' %}" alt="La República">
 </section>
+
+<script>
+  function changeCount(id, delta) {
+    let input = document.getElementById(id);
+    let value = parseInt(input.value);
+    value = Math.max(0, value + delta);
+    input.value = value;
+}
+  document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
+    flatpickr("#dateRange", {
+        mode: "range",
+        dateFormat: "d M Y",
+        minDate: "today",
+        defaultDate: [today, tomorrow]
+    });
+  });
+</script>
 
 {% endblock %}
