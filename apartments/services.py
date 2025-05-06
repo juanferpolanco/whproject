@@ -18,7 +18,8 @@ def get_available_apartments(start_date, end_date, ciudad, distrito):
             Pais=row['pais'],
             N_Banos=row['n_banos'],
             N_Camas=row['n_camas'],
-            N_Personas=row['n_personas']
+            N_Personas=row['n_personas'],
+            ImagePath=row['imagepath']
         )
         apartments.append(apartment)
     

@@ -23,7 +23,13 @@ def available_apartments_list(request):
     adultos = request.GET.get('adultos')
     ninos = request.GET.get('ninos')
     mascotas = request.GET.get('mascotas')
-    print("DEBUG DATA:", fecha_rango)
-    apartments = get_available_apartments('2025-05-05', '2025-05-05', ciudad, distrito)
+    
+    fechaSplit = fecha_rango.split("to")
+    start_date = fechaSplit[0].replace(" ", "")
+    end_date = fechaSplit[1].replace(" ", "")
+
+    #print(start_date, end_date)
+
+    apartments = get_available_apartments(start_date, end_date, ciudad, distrito)
     
     return render(request, 'apartments_list.html', {'apartments': apartments})

@@ -4,16 +4,16 @@
     Confirmación de Reserva
 {% endblock %}
 
+{% load static %}
+
 {% block content %}
 <div class="container my-5">
     <div class="row">
-        <!-- Left side: registration and personal info -->
         <div class="col-lg-7">
             <h2 class="fw-bold text-uppercase">Registro</h2>
             <p>Te enviaremos la confirmación de tu reserva por correo electrónico.</p>
 
-            <form>
-                <!-- Email and password -->
+            <form action="{% url 'home' %}">
                 <div class="mb-3">
                     <label for="email" class="form-label">Correo electrónico</label>
                     <input type="email" class="form-control" id="email" placeholder="Examplemail@example.com">
@@ -63,25 +63,25 @@
         <!-- Right side: reservation summary -->
         <div class="col-lg-5">
             <div class="border rounded p-4 shadow-sm">
-                <h6 class="text-end">
+                {% comment %} <h6 class="text-end">
                     ¿Necesitas ayuda para completar tu reserva?
-                </h6>
+                </h6> {% endcomment %}
                 <div class="d-flex align-items-center mb-3">
-                    {% comment %} <img src="{% static 'images/apartment-placeholder.jpg' %}" class="img-thumbnail me-3" style="width: 100px;" alt="Dazzling 2BR in Condesa"> {% endcomment %}
+                    <img src="{% static 'images/'|add:apartment.ImagePath %}" class="img-thumbnail me-3" style="width: 170px; padding: 0rem; !important" alt="Dazzling 2BR in Condesa">
                     <div>
-                        <strong>Dazzling 2BR in Condesa</strong><br>
-                        Bogotá Virrey, Bogotá, Colombia
+                        <strong>{{ apartment.Name}}</strong><br>
+                        {{ apartment.Barrio }}, {{ apartment.Ciudad }}, {{ apartment.Pais }}
                     </div>
                 </div>
 
                 <div class="mb-2 d-flex justify-content-between">
                     <span>Fechas</span>
-                    <span><a href="#" class="text-decoration-none">17 - 24 Nov</a></span>
+                    <span><a href="#" class="text-decoration-none">{{ date_range }}</a></span>
                 </div>
-                <div class="mb-2 d-flex justify-content-between">
+                {% comment %} <div class="mb-2 d-flex justify-content-between">
                     <span>Huéspedes</span>
                     <span><a href="#" class="text-decoration-none">2 personas</a></span>
-                </div>
+                </div> {% endcomment %}
 
                 <hr>
 

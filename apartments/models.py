@@ -10,3 +10,8 @@ class Apartment(models.Model):
     N_Personas = models.IntegerField(default=1)
     N_Banos =  models.IntegerField(default=1)
     N_Camas = models.IntegerField(default=1)
+    ImagePath = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.Name
+    

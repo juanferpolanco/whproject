@@ -7,6 +7,10 @@
 {% load static %}
 
 {% block content %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <div class="container my-5">
     <div class="row mb-4">
         <div class="col-lg-8">
@@ -88,29 +92,49 @@
                     <span class="fw-bold">DIARIO</span>
                     <span>US$ 83.00 POR NOCHE</span>
                 </div>
-                <form>
+                <form action="{% url 'reservations:detail' %}" method="get">
+                    <input type="hidden" name="apartment_id" value="{{ apartment.id }}">
+                    
                     <div class="mb-3">
-                        <label for="dates" class="form-label">Llegada - Salida</label>
-                        <input type="text" id="dates" class="form-control" placeholder="May 1/23 - Jun 3/23">
+                        <label for="dateRangeDetail" class="form-label">Llegada - Salida</label>
+                        <input type="text" id="dateRangeDetail" name="date_range" class="form-control border-0 bg-transparent p-0" placeholder="Selecciona fechas" style="width: 220px; font-weight: bold;">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="email" id="email" class="form-control" placeholder="tu@email.com">
+                        <input type="email" id="email" name="email" class="form-control" placeholder="tu@email.com">
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Teléfono</label>
-                        <input type="tel" id="phone" class="form-control" placeholder="+57">
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="+57">
                     </div>
-                    <div class="mb-3">
-                        <label for="discount" class="form-label">Código de descuento</label>
-                        <input type="text" id="discount" class="form-control">
-                    </div>
-                    {% comment %} <button type="submit" class="btn btn-dark w-100">RESERVAR AHORA</button> {% endcomment %}
-                    <a href="{% url 'reservations:detail' %}" class="btn btn-dark w-100">RESERVAR AHORA</a>
+                    <button type="submit" class="btn btn-dark w-100">RESERVAR AHORA</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date();
+        const tomorrow = new Date();
+        tomorrow.setDate(today.getDate() + 1);
+  
+        flatpickr("#dateRangeDetail", {
+            mode: "range",
+            //dateFormat: "d M Y",
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            defaultDate: [today, tomorrow],
+            onReady: function(selectedDates, dateStr, instance) {
+              // Set the initial value once flatpickr is ready
+              document.getElementById('inputFechaRango').value = dateStr;
+            },
+            onChange: function(selectedDates, dateStr) {
+                document.getElementById('inputFechaRango').value = dateStr;
+            }
+        });
+    });
+</script>
 
 {% endblock %}
