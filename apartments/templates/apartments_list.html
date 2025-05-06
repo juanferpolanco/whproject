@@ -24,13 +24,13 @@
                         <span>US$ 120 / Noche</span>
                         <div>
                             <span class="me-3">
-                                <img src="{% static 'images/person-icon.svg' %}" style="padding-bottom: 3px;"> {{ apartment.N_Personas }}
+                                {{ apartment.N_Personas }} <img src="{% static 'images/person-icon.svg' %}" style="padding-bottom: 3px;">
                             </span>
                             {% comment %} <span class="me-3">
                                 <i class="bi bi-badge-wc"></i> {{ apartment.N_Banos }}
                             </span> {% endcomment %}
                             <span>
-                                <img src="{% static 'images/bed-icon.svg' %}"> {{ apartment.N_Camas }}
+                                {{ apartment.N_Camas }} <img src="{% static 'images/bed-icon.svg' %}">
                             </span>
                         </div>
                     </div>

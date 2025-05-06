@@ -1,11 +1,26 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    {{ apartment.Name }}
+    Detalle
 {% endblock %}
+
+{% load static %}
 
 {% block content %}
 <div class="container my-5">
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <img src="{% static 'images/apartmentdetail1.png' %}" class="img-fluid w-100 mb-2" alt="{{ apartment.Name }}" 
+            style="    height: 429px; display: block; object-fit: cover;">
+        </div>
+        <div class="col-lg-4 d-flex flex-column gap-2">
+            <img src="{% static 'images/apartmentdetail2.png' %}" class="img-fluid" alt="Apartment photo 1" 
+            style="height: 211px !important; display: block; object-fit: cover;">
+            <img src="{% static 'images/apartmentdetail3.png' %}" class="img-fluid" alt="Apartment photo 2" 
+            style="height: 211px !important; display: block; object-fit: cover;">
+        </div>
+    </div>
+    
     <div class="row">
         <div class="col-lg-8">
             <div class="mb-4">
@@ -16,9 +31,9 @@
                     <img src="{% static 'images/apartment-placeholder.jpg' %}" class="img-thumbnail" style="width: 100px;" alt="Thumbnail 3">
                 </div> {% endcomment %}
             </div>
-            <h2 class="fw-bold">{{ apartment.Name }}</h2>
-            <p class="text-muted">{{ apartment.Barrio }}, {{ apartment.Ciudad }}, {{ apartment.Pais }}</p>
-            <p>
+            <h2 class="fw-bold" style="text-transform: uppercase; font-size: 45px; margin-bottom: 0rem !important;">{{ apartment.Name }}</h2>
+            <p class="text-muted" style="margin-bottom: 0rem !important;">{{ apartment.Barrio }}, {{ apartment.Ciudad }}, {{ apartment.Pais }}</p>
+            <p style="margin-bottom: 0rem !important;">
                 {{ apartment.N_Personas }} invitados |
                 1 habitación |
                 {{ apartment.N_Camas }} cama(s) |
@@ -30,30 +45,41 @@
                 Id mi velit eget volutpat scelerisque. Sapien sed nibh malesuada bibendum pharetra.
             </p>
             <hr>
-            <h4>Amenities</h4>
-            <div class="d-flex flex-wrap gap-4 my-3">
-                <div class="text-center">
-                    <i class="bi bi-elevator"></i><br>Elevator
+            <h4 style="text-transform: uppercase; font-size: 30px;">Amenities</h4>
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                <div class="col text-center">
+                    <img src="{% static 'images/elevator-svgrepo-com.svg' %}" alt="Elevator" class="amenity-icon">
+                    <p>Elevator</p>
                 </div>
-                <div class="text-center">
-                    <i class="bi bi-car-front"></i><br>Indoor Parking
+                <div class="col text-center">
+                    <img src="{% static 'images/parking-fee-svgrepo-com.svg' %}" alt="Indoor Parking" class="amenity-icon">
+                    <p>Indoor Parking</p>
                 </div>
-                <div class="text-center">
-                    <i class="bi bi-tv"></i><br>TV
+                <div class="col text-center">
+                    <img src="{% static 'images/tv-svgrepo-com.svg' %}" alt="TV" class="amenity-icon">
+                    <p>TV</p>
                 </div>
-                <div class="text-center">
-                    <i class="bi bi-person-bounding-box"></i><br>Doorman
+                <div class="col text-center">
+                    <img src="{% static 'images/bell-boy-svgrepo-com.svg' %}" alt="Doorman" class="amenity-icon">
+                    <p>Doorman</p>
                 </div>
-                <div class="text-center">
-                    <i class="bi bi-tree"></i><br>Patio or Balcony
+                <div class="col text-center">
+                    <img src="{% static 'images/balcony-window-svgrepo-com.svg' %}" alt="Patio or Balcony" class="amenity-icon">
+                    <p>Patio or Balcony</p>
                 </div>
-                <div class="text-center">
-                    <i class="bi bi-fire"></i><br>BBQ Grill
+                <div class="col text-center">
+                    <img src="{% static 'images/bbq-svgrepo-com.svg' %}" alt="BBQ Grill" class="amenity-icon">
+                    <p>BBQ Grill</p>
                 </div>
             </div>
             <hr>
-            <h4>Bedrooms</h4>
-            <p>Bedroom 1: 1 Queen Bed</p>
+            <h4 style="text-transform: uppercase; font-size: 30px;">Bedrooms</h4>
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                <div class="col text-center">
+                    <img src="{% static 'images/bed-double-svgrepo-com.svg' %}" alt="Elevator" class="amenity-icon">
+                    <p>1 Queen Bed</p>
+                </div>
+            </div>
         </div>
 
         <div class="col-lg-4">
@@ -86,4 +112,5 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
