@@ -19,12 +19,12 @@
         <p class="lead">BEST OF BOTH WORLDS</p>
 
         <!-- Search Bar -->
-        <form method="GET" action="{% url 'apartments:available' %}" class="d-flex bg-light rounded-pill shadow p-2 mt-4 align-items-center justify-content-between" style="max-width: 1100px; margin: auto;">
+        <form method="GET" action="{% url 'apartments:list' %}" class="d-flex bg-light rounded-pill shadow p-2 mt-4 align-items-center justify-content-between" style="max-width: 1100px; margin: auto;">
     
           <!-- Hidden fields -->
-          <input type="hidden" name="ciudad" id="inputCiudad">
-          <input type="hidden" name="distrito" id="inputDistrito">
-          <input type="hidden" name="fecha_rango" id="inputFechaRango">
+          <input type="hidden" name="ciudad" id="inputCiudad" value="{{ request.GET.ciudad }}">
+          <input type="hidden" name="distrito" id="inputDistrito" value="{{ request.GET.distrito }}">
+          <input type="hidden" name="fecha_rango" id="inputFechaRango" value="{{ request.GET.fecha_rango }}">
           <input type="hidden" name="adultos" id="inputAdultos" value="1">
           <input type="hidden" name="ninos" id="inputNinos" value="1">
           <input type="hidden" name="mascotas" id="inputMascotas" value="1">

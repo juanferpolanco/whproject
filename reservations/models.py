@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from apartments.models import Apartment
 
 class Reservation(models.Model):
-    Apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE)
+    Apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE, related_name='Reservation')
     User = models.ForeignKey(User, on_delete=models.CASCADE)
     StartDate = models.DateField()
     EndDate = models.DateField()
