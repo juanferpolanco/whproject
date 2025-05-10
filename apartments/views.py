@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views import View
-from apartments.models import Apartment
-from reservations.models import Reservation
-from django.http import HttpResponse
+from django.db.models import Prefetch
+from apartments.models import Apartment, ApartmentNew, ApartmentPicture
+from reservations.models import ReservationNew
+# from django.http import HttpResponse
 from apartments.services import get_available_apartments
 
 # Create your views here.
@@ -14,8 +15,23 @@ def apartments_list(request):
     return render(request, 'apartments_list.html', { 'apartments' : apartments })
 
 def apartment_detail(request, apartment_id):
-    apartment = Apartment.objects.get(id=apartment_id)
-    return render(request, 'apartment_detail.html', { 'apartment' : apartment })
+    # apartment = Apartment.objects.get(id=apartment_id)
+    # apartment = ApartmentNew.objects.get(id=apartment_id)
+    # return render(request, 'apartment_detail.html', { 'apartment' : apartment })
+    apartment = get_object_or_404(ApartmentNew, id=apartment_id)
+    pictures = list(apartment.pictures.order_by('id')[:3])  # force evaluate
+
+    photo1 = pictures[0].url if len(pictures) > 0 else None
+    photo2 = pictures[1].url if len(pictures) > 1 else None
+    photo3 = pictures[2].url if len(pictures) > 2 else None
+
+    context = {
+        'apartment': apartment,
+        'photo1': photo1,
+        'photo2': photo2,
+        'photo3': photo3
+    }
+    return render(request, 'apartment_detail.html', context)
 
 def available_apartments_list(request):
     ciudad = request.GET.get('ciudad')
@@ -51,22 +67,22 @@ class ApartmentList(View):
         barrio = request.GET.get('distrito')
         fecha_rango = request.GET.get('fecha_rango')
 
-        fechaSplit = fecha_rango.split("to")
-        start_date = fechaSplit[0].replace(" ", "")
-        end_date = fechaSplit[1].replace(" ", "")
-
-        apartments = Apartment.objects.all()
+        apartments = ApartmentNew.objects.prefetch_related(
+            Prefetch('pictures', queryset=ApartmentPicture.objects.order_by('id')),
+            Prefetch('reservations_new', queryset=ReservationNew.objects.all())
+        ).all()
 
         if ciudad:
-            apartments = apartments.filter(Ciudad__iexact=ciudad)
+            apartments = apartments.filter(city__iexact=ciudad)
         if barrio:
-            apartments = apartments.filter(Barrio__iexact=barrio)
+            apartments = apartments.filter(neighborhood__iexact=barrio)
 
-        if start_date and end_date:
+        if fecha_rango:
+            start_date, end_date = [d.strip() for d in fecha_rango.split('to')]
             apartments = apartments.exclude(
-                Reservation__StartDate__lt=end_date, #less than
-                Reservation__EndDate__gt=start_date #greater than
+                reservations_new__start_date__lt=end_date,
+                reservations_new__end_date__gt=start_date
             )
 
-        return apartments
+        return apartments[:20]
 

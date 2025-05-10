@@ -14,14 +14,20 @@
 <div class="container my-5">
     <div class="row mb-4">
         <div class="col-lg-8">
-            <img src="{% static 'images/apartmentdetail1.png' %}" class="img-fluid w-100 mb-2" alt="{{ apartment.Name }}" 
-            style="    height: 429px; display: block; object-fit: cover;">
+            {% if photo1 %}
+                <img src="{{ photo1 }}" class="img-fluid w-100 mb-2" alt="{{ apartment.Name }}" 
+                style="height: 429px; display: block; object-fit: cover;">
+            {% endif %}
         </div>
         <div class="col-lg-4 d-flex flex-column gap-2">
-            <img src="{% static 'images/apartmentdetail2.png' %}" class="img-fluid" alt="Apartment photo 1" 
-            style="height: 211px !important; display: block; object-fit: cover;">
-            <img src="{% static 'images/apartmentdetail3.png' %}" class="img-fluid" alt="Apartment photo 2" 
-            style="height: 211px !important; display: block; object-fit: cover;">
+            {% if photo2 %}
+                <img src="{{ photo2 }}" class="img-fluid" alt="Apartment photo 2" 
+                style="height: 211px !important; display: block; object-fit: cover;">
+            {% endif %}
+            {% if photo3 %}
+                <img src="{{ photo3 }}" class="img-fluid" alt="Apartment photo 3" 
+                style="height: 211px !important; display: block; object-fit: cover;">
+            {% endif %}
         </div>
     </div>
     
@@ -35,18 +41,17 @@
                     <img src="{% static 'images/apartment-placeholder.jpg' %}" class="img-thumbnail" style="width: 100px;" alt="Thumbnail 3">
                 </div> {% endcomment %}
             </div>
-            <h2 class="fw-bold" style="text-transform: uppercase; font-size: 45px; margin-bottom: 0rem !important;">{{ apartment.Name }}</h2>
-            <p class="text-muted" style="margin-bottom: 0rem !important;">{{ apartment.Barrio }}, {{ apartment.Ciudad }}, {{ apartment.Pais }}</p>
+            <h2 class="fw-bold" style="text-transform: uppercase; font-size: 45px; margin-bottom: 0rem !important;">{{ apartment.title }}</h2>
+            <p class="text-muted" style="margin-bottom: 0rem !important;">{{ apartment.neighborhood }}, {{ apartment.city }}, {{ apartment.country }}</p>
             <p style="margin-bottom: 0rem !important;">
-                {{ apartment.N_Personas }} invitados |
+                {{ apartment.accommodates }} invitados |
                 1 habitación |
-                {{ apartment.N_Camas }} cama(s) |
-                {{ apartment.N_Banos }} baño(s)
+                {% comment %} {{ apartment.N_Camas }} cama(s) | {% endcomment %}
+                {{ apartment.bathrooms }} baño(s)
             </p>
             <hr>
             <p>
-                Lorem ipsum dolor sit amet consectetur. Quam viverra vel convallis amet iaculis. 
-                Id mi velit eget volutpat scelerisque. Sapien sed nibh malesuada bibendum pharetra.
+                {{ apartment.public_summary }}
             </p>
             <hr>
             <h4 style="text-transform: uppercase; font-size: 30px;">Amenities</h4>

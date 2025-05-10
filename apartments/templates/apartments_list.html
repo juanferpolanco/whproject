@@ -12,25 +12,26 @@
     <div class="col-md-6 col-lg-4 mb-4">
         <a href="{% url 'apartments:detail' apartment_id=apartment.id %}" class="apartment-card">
             <div class="card h-100 border-0">
-                <img src="{% static 'images/'|add:apartment.ImagePath %}" class="apartment-image" alt="Imagen de {{ apartment.Name }}">
+                {% comment %} <img src="{% static 'images/'|add:apartment.ImagePath %}" class="apartment-image" alt="Imagen de {{ apartment.Name }}"> {% endcomment %}
+                <img src="{{ apartment.first_picture }}" class="apartment-image" alt="Imagen de {{ apartment.title }}">
                 
                 <div class="card-body" style="padding: 12px 0px 0px 0px !important">
-                    <p class="card-title" style="font-weight: bold; font-size: 18px; margin-bottom: 0px;">{{ apartment.Name }}</p>
+                    <p class="card-title" style="font-weight: bold; font-size: 18px; margin-bottom: 0px;">{{ apartment.title }}</p>
                     <p class="card-text text-muted">
-                        {{ apartment.Barrio }}, {{ apartment.Ciudad }}, {{ apartment.Pais }}
+                        {{ apartment.neighborhood }}, {{ apartment.city }}, {{ apartment.country }}
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         {% comment %} <span><strong>US$ 120</strong> / Noche</span> {% endcomment %}
-                        <span>US$ 120 / Noche</span>
+                        <span>US$ {{ apartment.base_price_int }} / Noche</span>
                         <div>
                             <span class="me-3">
-                                {{ apartment.N_Personas }} <img src="{% static 'images/person-icon.svg' %}" style="padding-bottom: 3px;">
+                                {{ apartment.accommodates }} <img src="{% static 'images/person-icon.svg' %}" style="padding-bottom: 3px;">
                             </span>
                             {% comment %} <span class="me-3">
                                 <i class="bi bi-badge-wc"></i> {{ apartment.N_Banos }}
                             </span> {% endcomment %}
                             <span>
-                                {{ apartment.N_Camas }} <img src="{% static 'images/bed-icon.svg' %}">
+                                {{ apartment.bathrooms }} <img src="{% static 'images/bed-icon.svg' %}">
                             </span>
                         </div>
                     </div>
