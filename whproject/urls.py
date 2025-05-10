@@ -20,8 +20,10 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+    # path('', views.home, name='home'),
+    path('', views.Home.as_view(), name='home'),
     path('apartments/', include('apartments.urls')),
     path('users/', include('users.urls')),
-    path('reservations/', include('reservations.urls'))
+    path('reservations/', include('reservations.urls')),
+    path('api/neighborhoods/', views.get_neighborhoods, name='get_neighborhoods'),
 ]

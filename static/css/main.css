@@ -44,6 +44,11 @@ a {
     padding: 0 20px;           /* optional, add some horizontal padding */
 }
 
+.dropdown-menu.scrollable-dropdown {
+  max-height: 165px !important;
+  overflow-y: auto !important;
+}
+
 /* Featured Properties*/
 
 .featured-properties {

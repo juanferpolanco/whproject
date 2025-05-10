@@ -66,16 +66,20 @@ class ApartmentList(View):
         ciudad = request.GET.get('ciudad')
         barrio = request.GET.get('distrito')
         fecha_rango = request.GET.get('fecha_rango')
+        adultos = request.GET.get('adultos')
+        ninos = request.GET.get('ninos')
 
         apartments = ApartmentNew.objects.prefetch_related(
             Prefetch('pictures', queryset=ApartmentPicture.objects.order_by('id')),
             Prefetch('reservations_new', queryset=ReservationNew.objects.all())
         ).all()
 
-        if ciudad:
+        if ciudad and ciudad != 'All Cities':
             apartments = apartments.filter(city__iexact=ciudad)
         if barrio:
             apartments = apartments.filter(neighborhood__iexact=barrio)
+        if adultos or ninos:
+            apartments = apartments.filter(accommodates__gte=int(adultos)+int(ninos))
 
         if fecha_rango:
             start_date, end_date = [d.strip() for d in fecha_rango.split('to')]
