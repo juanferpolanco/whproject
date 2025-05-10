@@ -100,3 +100,32 @@ class ApartmentAmenity(models.Model):
 
     def __str__(self):
         return f"{self.amenity.name} for {self.apartment.title}"
+    
+class ApartmentCountry(models.Model):
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'apartments_countries'
+
+    def __str__(self):
+        return self.name
+
+class ApartmentCity(models.Model):
+    country = models.ForeignKey(ApartmentCountry, on_delete=models.CASCADE, related_name='apartment_countries')
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'apartments_cities'
+
+    def __str__(self):
+        return self.name
+    
+class ApartmentNeighborhood(models.Model):
+    city = models.ForeignKey(ApartmentCity, on_delete=models.CASCADE, related_name='apartment_neighborhoods')
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'apartments_neighborhoods'
+
+    def __str__(self):
+        return self.name
