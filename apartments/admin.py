@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Apartment
+from . models import Apartment, ApartmentCountry, ApartmentCity, ApartmentNeighborhood
 
 # Register your models here.
 
@@ -8,6 +8,22 @@ class ApartmentAdmin(admin.ModelAdmin):
     list_filter = ["Ciudad"]
 
 admin.site.register(Apartment, ApartmentAdmin)
+
+@admin.register(ApartmentCountry)
+class ApartmentCountryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+
+@admin.register(ApartmentCity)
+class ApartmentCityAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'country')
+    list_filter = ('country',)
+    search_fields = ('name',)
+
+@admin.register(ApartmentNeighborhood)
+class ApartmentNeighborhoodAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'city')
+    list_filter = ('city',)
+    search_fields = ('name',)
 
 # class ApartmentPictureInline(admin.TabularInline):
 #     model = ApartmentPicture
