@@ -12,10 +12,50 @@ function updateGuest(type, change) {
 //     document.getElementById('ciudadDropdown').textContent = value;
 //   } {% endcomment %}
 
-function setCiudad(value) {
-    document.getElementById('inputCiudad').value = value;
-    document.getElementById('ciudadDropdown').textContent = value;
+// function setCiudad(value) {
+//     document.getElementById('inputCiudad').value = value;
+//     document.getElementById('ciudadDropdown').textContent = value;
 
+//     document.getElementById('inputDistrito').value = '';
+//     document.getElementById('distritoDropdown').textContent = 'Distrito';
+
+//     const distritoDropdown = document.getElementById('distritoDropdown');
+//     const distritoMenu = distritoDropdown.nextElementSibling;
+//     distritoMenu.innerHTML = '<li><span class="dropdown-item">Loading...</span></li>';
+
+//     fetch(`/api/neighborhoods/?city=${encodeURIComponent(value)}`)
+//         .then(response => response.json())
+//         .then(data => {
+//             distritoMenu.innerHTML = '';  
+
+//             if (data.neighborhoods.length > 0) {
+//                 data.neighborhoods.forEach(neighborhood => {
+//                     const li = document.createElement('li');
+//                     const a = document.createElement('a');
+//                     a.className = 'dropdown-item';
+//                     a.href = '#';
+//                     a.onclick = function() { setDistrito(neighborhood); };
+//                     a.textContent = neighborhood;
+//                     li.appendChild(a);
+//                     distritoMenu.appendChild(li);
+//                 });
+//             } else {
+//                 const li = document.createElement('li');
+//                 li.innerHTML = '<span class="dropdown-item">No neighborhoods</span>';
+//                 distritoMenu.appendChild(li);
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error fetching neighborhoods:', error);
+//             distritoMenu.innerHTML = '<li><span class="dropdown-item text-danger">Error loading</span></li>';
+//         });
+// } 
+
+function setCiudad(cityId, cityName) {
+    document.getElementById('inputCiudad').value = cityName; // used in the URL
+    document.getElementById('ciudadDropdown').textContent = cityName;
+
+    // Reset district
     document.getElementById('inputDistrito').value = '';
     document.getElementById('distritoDropdown').textContent = 'Distrito';
 
@@ -23,10 +63,11 @@ function setCiudad(value) {
     const distritoMenu = distritoDropdown.nextElementSibling;
     distritoMenu.innerHTML = '<li><span class="dropdown-item">Loading...</span></li>';
 
-    fetch(`/api/neighborhoods/?city=${encodeURIComponent(value)}`)
+    // Use city ID in API call
+    fetch(`/api/neighborhoods/?city_id=${encodeURIComponent(cityId)}`)
         .then(response => response.json())
         .then(data => {
-            distritoMenu.innerHTML = '';  
+            distritoMenu.innerHTML = '';
 
             if (data.neighborhoods.length > 0) {
                 data.neighborhoods.forEach(neighborhood => {
@@ -34,22 +75,20 @@ function setCiudad(value) {
                     const a = document.createElement('a');
                     a.className = 'dropdown-item';
                     a.href = '#';
-                    a.onclick = function() { setDistrito(neighborhood); };
+                    a.onclick = function () { setDistrito(neighborhood); };
                     a.textContent = neighborhood;
                     li.appendChild(a);
                     distritoMenu.appendChild(li);
                 });
             } else {
-                const li = document.createElement('li');
-                li.innerHTML = '<span class="dropdown-item">No neighborhoods</span>';
-                distritoMenu.appendChild(li);
+                distritoMenu.innerHTML = '<li><span class="dropdown-item">No neighborhoods</span></li>';
             }
         })
         .catch(error => {
             console.error('Error fetching neighborhoods:', error);
             distritoMenu.innerHTML = '<li><span class="dropdown-item text-danger">Error loading</span></li>';
         });
-} 
+}
 
 function setDistrito(value) {
     document.getElementById('inputDistrito').value = value;

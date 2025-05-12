@@ -44,8 +44,15 @@
                   <li>
                     <a class="dropdown-item" href="#" onclick="setCiudad('All Cities')">All Cities</a>
                   </li>
-                  {% for city in cities %}
+                  {% comment %} {% for city in cities %}
                     <li><a class="dropdown-item" href="#" onclick="setCiudad('{{ city }}')">{{ city }}</a></li>
+                  {% endfor %} {% endcomment %}
+                  {% for city in cities %}
+                    <li>
+                      <a class="dropdown-item" href="#" onclick="setCiudad('{{ city.id }}', '{{ city.name }}')">
+                        {{ city.name }}
+                      </a>
+                    </li>
                   {% endfor %}
               </ul>
           </div>
