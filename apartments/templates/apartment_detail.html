@@ -97,7 +97,7 @@
                     <span class="fw-bold">DIARIO</span>
                     <span>US$ 83.00 POR NOCHE</span>
                 </div>
-                <form action="{% url 'reservations:detail' %}" method="get">
+                <form action="{% url 'reservations:reservation' %}" method="get">
                     <input type="hidden" name="apartment_id" value="{{ apartment.id }}">
                     
                     <div class="mb-3">

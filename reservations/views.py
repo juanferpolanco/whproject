@@ -1,11 +1,14 @@
 from decimal import Decimal
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from apartments.models import Apartment, ApartmentNew
-from reservations.models import Reservation
+from reservations.models import Reservation, ReservationNew
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.views import View
 
 # Create your views here.
+
+### Function Based Views ###
 
 # def reservation_detail(request):
 #     # apartments = Apartment.objects.all()
@@ -97,3 +100,72 @@ def create_reservation(request):
                 return render(request, 'home.html')
 
     return render(request, 'home.html')
+
+###
+
+### Class Based Views ###
+
+class ReservationView(View):
+    def get(self, request):
+        date_range = request.GET.get('date_range')
+        # formatted_date_range = ""
+
+        # if date_range:
+        #     try:
+        #         start_str, end_str = date_range.split(' to ')
+        #         start_date = datetime.strptime(start_str.strip(), '%Y-%m-%d')
+        #         end_date = datetime.strptime(end_str.strip(), '%Y-%m-%d')
+
+        #         if start_date.month == end_date.month:
+        #             formatted_date_range = f"{start_date.day} - {end_date.day} {end_date.strftime('%b')}"
+        #         else:
+        #             formatted_date_range = f"{start_date.day} {start_date.strftime('%b')} - {end_date.day} {end_date.strftime('%b')}"
+        #     except Exception:
+        #         formatted_date_range = date_range
+
+        apartment_id = request.GET.get('apartment_id')
+        email = request.GET.get('email')
+        phone = request.GET.get('phone')
+
+        apartment = get_object_or_404(ApartmentNew, id=apartment_id)
+        first_picture_url = apartment.first_picture
+
+        context = {
+            'apartment': apartment,
+            'date_range': date_range,
+            'email': email,
+            'phone': phone,
+            'first_picture': first_picture_url
+        }
+
+        return render(request, 'reservation_detail.html', context)
+
+    def post(self, request):
+        apartment_id = request.POST.get('apartment_id')
+        date_range = request.POST.get('date_range')
+        total_price = request.POST.get('total_price')
+
+        user = request.user if request.user.is_authenticated else User.objects.first()
+
+        try:
+            apartment = get_object_or_404(ApartmentNew, id=apartment_id)
+
+            start_str, end_str = date_range.split(' to ')
+            start_date = datetime.strptime(start_str.strip(), '%Y-%m-%d').date()
+            end_date = datetime.strptime(end_str.strip(), '%Y-%m-%d').date()
+
+            reservation = ReservationNew.objects.create(
+                apartment=apartment,
+                user=user,
+                start_date=start_date,
+                end_date=end_date,
+                total_price=Decimal(total_price)
+            )
+
+            return redirect('home')
+        except Exception as e:
+            print("Error:", e)
+            return render(request, 'reservation_detail.html', {
+                'apartment': apartment,
+                'error': 'No se pudo guardar la reserva.'
+            })

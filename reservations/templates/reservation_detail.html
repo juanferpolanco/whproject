@@ -13,7 +13,15 @@
             <h2 class="fw-bold text-uppercase">Registro</h2>
             <p>Te enviaremos la confirmación de tu reserva por correo electrónico.</p>
 
-            <form action="{% url 'home' %}">
+            {% comment %} <form action="{% url 'home' %}"> {% endcomment %}
+            <form action="{% url 'reservations:reservation' %}" method="post">
+
+                {% csrf_token %}
+
+                <input type="hidden" name="apartment_id" value="{{ apartment.id }}">
+                <input type="hidden" name="date_range" value="{{ date_range }}">
+                <input type="hidden" name="total_price" value="168.00">
+
                 <div class="mb-3">
                     <label for="email" class="form-label">Correo electrónico</label>
                     <input type="email" class="form-control" id="email" placeholder="Examplemail@example.com">
