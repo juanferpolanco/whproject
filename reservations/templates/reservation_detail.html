@@ -67,10 +67,11 @@
                     ¿Necesitas ayuda para completar tu reserva?
                 </h6> {% endcomment %}
                 <div class="d-flex align-items-center mb-3">
-                    <img src="{% static 'images/'|add:apartment.ImagePath %}" class="img-thumbnail me-3" style="width: 170px; padding: 0rem; !important" alt="Dazzling 2BR in Condesa">
+                    {% comment %} <img src="{% static 'images/'|add:apartment.ImagePath %}" class="img-thumbnail me-3" style="width: 170px; padding: 0rem; !important" alt="Dazzling 2BR in Condesa"> {% endcomment %}
+                    <img src="{{ first_picture }}" class="img-thumbnail me-3" style="width: 170px; padding: 0rem !important;" alt="{{ apartment.title }}">
                     <div>
-                        <strong>{{ apartment.Name}}</strong><br>
-                        {{ apartment.Barrio }}, {{ apartment.Ciudad }}, {{ apartment.Pais }}
+                        <strong>{{ apartment.title}}</strong><br>
+                        {{ apartment.neighborhood }}, {{ apartment.city }}, {{ apartment.country }}
                     </div>
                 </div>
 

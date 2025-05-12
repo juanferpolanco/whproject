@@ -1,6 +1,6 @@
 from decimal import Decimal
 from django.shortcuts import render, get_object_or_404
-from apartments.models import Apartment
+from apartments.models import Apartment, ApartmentNew
 from reservations.models import Reservation
 from datetime import datetime
 from django.contrib.auth.models import User
@@ -51,13 +51,16 @@ def reservation_detail(request):
     email = request.GET.get('email')
     phone = request.GET.get('phone')
 
-    apartment = Apartment.objects.get(id=apartment_id)
+    # apartment = Apartment.objects.get(id=apartment_id)
+    apartment = ApartmentNew.objects.get(id=apartment_id)
+    first_picture_url = apartment.first_picture
 
     context = {
         'apartment': apartment,
         'date_range': formatted_date_range,
         'email': email,
         'phone': phone,
+        'first_picture': first_picture_url
     }
 
     return render(request, 'reservation_detail.html', context)
