@@ -72,7 +72,8 @@ class ApartmentList(View):
         apartments = ApartmentNew.objects.prefetch_related(
             Prefetch('pictures', queryset=ApartmentPicture.objects.order_by('id')),
             Prefetch('reservations_new', queryset=ReservationNew.objects.all())
-        ).all()
+        ).filter(active=True)
+        # ).all()
 
         if ciudad and ciudad != 'All Cities':
             apartments = apartments.filter(city__iexact=ciudad)

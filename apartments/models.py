@@ -32,13 +32,15 @@ class ApartmentNew(models.Model):
 
     class Meta:
         db_table = 'apartments_apartmentnew'
+        verbose_name = "New apartment"
+        verbose_name_plural = "New apartments"
 
     def __str__(self):
         return self.title
     
     @property
     def first_picture(self):
-        first_pic = self.pictures.first()
+        first_pic = self.pictures.first()   
         return first_pic.url if first_pic else None
     
     @property

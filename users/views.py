@@ -27,6 +27,9 @@ def register_view(request):
     return render(request, 'register.html', { 'form': form })
 
 def login_view(request):
+    if(request.user.is_authenticated):
+        return redirect('home')
+
     if request.method == 'POST':
         form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -35,7 +38,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')  # Replace 'home' with your success URL name
+                return redirect('home')  
             else:
                 messages.error(request, 'Usuario o contraseña inválidos.')
         else:

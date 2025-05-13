@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Apartment, ApartmentCountry, ApartmentCity, ApartmentNeighborhood
+from . models import Apartment, ApartmentCountry, ApartmentCity, ApartmentNeighborhood, ApartmentPicture , Room, ApartmentAmenity, ApartmentNew
 
 # Register your models here.
 
@@ -25,24 +25,24 @@ class ApartmentNeighborhoodAdmin(admin.ModelAdmin):
     list_filter = ('city',)
     search_fields = ('name',)
 
-# class ApartmentPictureInline(admin.TabularInline):
-#     model = ApartmentPicture
-#     extra = 1
+class ApartmentPictureInline(admin.TabularInline):
+    model = ApartmentPicture
+    extra = 1
 
-# class RoomInline(admin.TabularInline):
-#     model = Room
-#     extra = 1
+class RoomInline(admin.TabularInline):
+    model = Room
+    extra = 1
 
-# class ApartmentAmenityInline(admin.TabularInline):
-#     model = ApartmentAmenity
-#     extra = 1
+class ApartmentAmenityInline(admin.TabularInline):
+    model = ApartmentAmenity
+    extra = 1
 
-# @admin.register(ApartmentNew)
-# class ApartmentNewAdmin(admin.ModelAdmin):
-#     list_display = ('title', 'city', 'county', 'neighborhood', 'active')
-#     list_filter = ('city', 'active')
-#     search_fields = ('title', 'city', 'neighborhood')
-#     inlines = [ApartmentPictureInline, RoomInline, ApartmentAmenityInline]
+@admin.register(ApartmentNew)
+class ApartmentNewAdmin(admin.ModelAdmin):
+    list_display = ('title', 'city', 'country', 'neighborhood', 'active')
+    list_filter = ('city', 'active')
+    search_fields = ('title', 'city', 'neighborhood')
+    inlines = [ApartmentPictureInline, RoomInline, ApartmentAmenityInline]
 
 # @admin.register(Room)
 # class RoomAdmin(admin.ModelAdmin):
