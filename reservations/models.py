@@ -26,6 +26,11 @@ class ReservationNew(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    full_name = models.CharField(max_length=255, null=True)
+    nationality = models.CharField(max_length=100, null=True)
+    country_code = models.CharField(max_length=10, null=True)
+    phone = models.CharField(max_length=20, null=True)
+    birthdate = models.DateField(null=True)
 
     def __str__(self):
         return f"ReservationNew for {self.apartment.title} by {self.user.username} from {self.start_date} to {self.end_date}"

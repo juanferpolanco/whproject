@@ -1,3 +1,4 @@
+from django.db import connection
 from django.shortcuts import get_object_or_404, render
 from django.views import View
 from django.db.models import Prefetch
@@ -31,7 +32,12 @@ def apartment_detail(request, apartment_id):
         'photo2': photo2,
         'photo3': photo3
     }
-    return render(request, 'apartment_detail.html', context)
+
+    reponse = render(request, 'apartment_detail.html', context)
+
+    print(len(connection.queries))
+    return reponse
+    # return render(request, 'apartment_detail.html', context)
 
 def available_apartments_list(request):
     ciudad = request.GET.get('ciudad')
@@ -60,7 +66,10 @@ class ApartmentList(View):
     def get(self, request):
         apartments = self.get_filtered_apartments(request)
         context = {'apartments': apartments}
-        return render(request, 'apartments_list.html', context)
+        reponse = render(request, 'apartments_list.html', context)
+
+        print(len(connection.queries))
+        return reponse
 
     def get_filtered_apartments(self, request):
         ciudad = request.GET.get('ciudad')

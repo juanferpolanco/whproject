@@ -18,6 +18,8 @@ class ApartmentCityAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'country')
     list_filter = ('country',)
     search_fields = ('name',)
+    def has_change_permission(self, request, obj = ...):
+        return False
 
 @admin.register(ApartmentNeighborhood)
 class ApartmentNeighborhoodAdmin(admin.ModelAdmin):

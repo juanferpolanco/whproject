@@ -5,6 +5,7 @@ from reservations.models import Reservation, ReservationNew
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.views import View
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
@@ -106,26 +107,10 @@ def create_reservation(request):
 ### Class Based Views ###
 
 class ReservationView(View):
+    errors = None
     def get(self, request):
-        date_range = request.GET.get('date_range')
-        # formatted_date_range = ""
-
-        # if date_range:
-        #     try:
-        #         start_str, end_str = date_range.split(' to ')
-        #         start_date = datetime.strptime(start_str.strip(), '%Y-%m-%d')
-        #         end_date = datetime.strptime(end_str.strip(), '%Y-%m-%d')
-
-        #         if start_date.month == end_date.month:
-        #             formatted_date_range = f"{start_date.day} - {end_date.day} {end_date.strftime('%b')}"
-        #         else:
-        #             formatted_date_range = f"{start_date.day} {start_date.strftime('%b')} - {end_date.day} {end_date.strftime('%b')}"
-        #     except Exception:
-        #         formatted_date_range = date_range
-
         apartment_id = request.GET.get('apartment_id')
-        email = request.GET.get('email')
-        phone = request.GET.get('phone')
+        date_range = request.GET.get('date_range')
 
         apartment = get_object_or_404(ApartmentNew, id=apartment_id)
         first_picture_url = apartment.first_picture
@@ -133,9 +118,8 @@ class ReservationView(View):
         context = {
             'apartment': apartment,
             'date_range': date_range,
-            'email': email,
-            'phone': phone,
-            'first_picture': first_picture_url
+            'first_picture': first_picture_url,
+            'errors' : self.errors
         }
 
         return render(request, 'reservation_detail.html', context)
@@ -145,7 +129,27 @@ class ReservationView(View):
         date_range = request.POST.get('date_range')
         total_price = request.POST.get('total_price')
 
-        user = request.user if request.user.is_authenticated else User.objects.first()
+        full_name = request.POST.get('full_name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        nationality = request.POST.get('nationality')
+        country_code = request.POST.get('country_code')
+        phone = request.POST.get('phone')
+        birthdate = request.POST.get('birthdate')
+
+        if not request.user.is_authenticated:
+            if not User.objects.filter(username=email).exists():
+                user = User.objects.create_user(username=email, email=email, password=password)
+                user.first_name = full_name
+                user.save()
+            else:
+                user = User.objects.get(username=email)
+
+            authenticated_user = authenticate(request, username=email, password=password)
+            if authenticated_user:
+                login(request, authenticated_user)
+        else:
+            user = request.user
 
         try:
             apartment = get_object_or_404(ApartmentNew, id=apartment_id)
@@ -154,18 +158,25 @@ class ReservationView(View):
             start_date = datetime.strptime(start_str.strip(), '%Y-%m-%d').date()
             end_date = datetime.strptime(end_str.strip(), '%Y-%m-%d').date()
 
-            reservation = ReservationNew.objects.create(
+            ReservationNew.objects.create(
                 apartment=apartment,
                 user=user,
                 start_date=start_date,
                 end_date=end_date,
-                total_price=Decimal(total_price)
+                total_price=Decimal(total_price),
+                full_name=full_name,
+                nationality=nationality,
+                country_code=country_code,
+                phone=phone,
+                birthdate=birthdate
             )
 
             return redirect('home')
+
         except Exception as e:
-            print("Error:", e)
-            return render(request, 'reservation_detail.html', {
-                'apartment': apartment,
-                'error': 'No se pudo guardar la reserva.'
-            })
+            print("Error al guardar la reserva:", e)
+
+            self.errors = str(e)
+
+            return self.get(request)
+            

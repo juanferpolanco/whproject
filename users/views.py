@@ -16,6 +16,9 @@ from . forms import CustomUserCreationForm, CustomAuthenticationForm
 #     return render(request, "register.html", { "form" : form})
 
 def register_view(request):
+    if(request.user.is_authenticated):
+        return redirect('home')
+    
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():

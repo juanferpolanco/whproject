@@ -13,9 +13,7 @@
             <h2 class="fw-bold text-uppercase">Registro</h2>
             <p>Te enviaremos la confirmación de tu reserva por correo electrónico.</p>
 
-            {% comment %} <form action="{% url 'home' %}"> {% endcomment %}
             <form action="{% url 'reservations:reservation' %}" method="post">
-
                 {% csrf_token %}
 
                 <input type="hidden" name="apartment_id" value="{{ apartment.id }}">
@@ -25,26 +23,26 @@
                 {% if not request.user.is_authenticated %}
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="email" class="form-control" id="email" placeholder="Examplemail@example.com">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Examplemail@example.com" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Crear contraseña</label>
-                        <input type="password" class="form-control" id="password" placeholder="Ingresa una nueva contraseña">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa una nueva contraseña" required>
                     </div>
                     <p>¿Ya tienes una cuenta? <a href="#">Iniciar sesión</a></p>
-
                     <hr>
                 {% endif %}
+
                 <h4 class="fw-bold text-uppercase mt-4">Información Personal</h4>
 
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label for="full_name" class="form-label">Nombre completo</label>
-                        <input type="text" class="form-control" id="full_name" placeholder="Ingresa tu nombre completo">
+                        <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Ingresa tu nombre completo" required>
                     </div>
                     <div class="col-md-6">
                         <label for="nationality" class="form-label">Nacionalidad</label>
-                        <select class="form-select" id="nationality">
+                        <select class="form-select" id="nationality" name="nationality" required>
                             <option selected disabled>Selecciona tu país</option>
                             <option>Ecuador</option>
                             <option>Colombia</option>
@@ -53,15 +51,15 @@
                     </div>
                     <div class="col-md-3">
                         <label for="country_code" class="form-label">Indicador</label>
-                        <input type="text" class="form-control" id="country_code" placeholder="+1">
+                        <input type="text" class="form-control" id="country_code" name="country_code" placeholder="+1" required>
                     </div>
                     <div class="col-md-5">
                         <label for="phone" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control" id="phone" placeholder="Ingresa número de teléfono">
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Ingresa número de teléfono" required>
                     </div>
                     <div class="col-md-4">
                         <label for="birthdate" class="form-label">Fecha de nacimiento</label>
-                        <input type="date" class="form-control" id="birthdate">
+                        <input type="date" class="form-control" id="birthdate" name="birthdate" required>
                     </div>
                 </div>
 
@@ -69,17 +67,12 @@
             </form>
         </div>
 
-        <!-- Right side: reservation summary -->
         <div class="col-lg-5">
             <div class="border rounded p-4 shadow-sm">
-                {% comment %} <h6 class="text-end">
-                    ¿Necesitas ayuda para completar tu reserva?
-                </h6> {% endcomment %}
                 <div class="d-flex align-items-center mb-3">
-                    {% comment %} <img src="{% static 'images/'|add:apartment.ImagePath %}" class="img-thumbnail me-3" style="width: 170px; padding: 0rem; !important" alt="Dazzling 2BR in Condesa"> {% endcomment %}
                     <img src="{{ first_picture }}" class="img-thumbnail me-3" style="width: 170px; padding: 0rem !important;" alt="{{ apartment.title }}">
                     <div>
-                        <strong>{{ apartment.title}}</strong><br>
+                        <strong>{{ apartment.title }}</strong><br>
                         {{ apartment.neighborhood }}, {{ apartment.city }}, {{ apartment.country }}
                     </div>
                 </div>
@@ -88,10 +81,6 @@
                     <span>Fechas</span>
                     <span><a href="#" class="text-decoration-none">{{ date_range }}</a></span>
                 </div>
-                {% comment %} <div class="mb-2 d-flex justify-content-between">
-                    <span>Huéspedes</span>
-                    <span><a href="#" class="text-decoration-none">2 personas</a></span>
-                </div> {% endcomment %}
 
                 <hr>
 
@@ -114,14 +103,6 @@
                     <span>Total</span>
                     <span>US$ 168</span>
                 </div>
-
-                {% comment %} <div class="text-center mt-3">
-                    Con esta reserva estás generando <br>
-                    <span class="badge bg-danger fs-6">84 Wynwood Points</span>
-                </div>
-                <div class="text-center mt-2">
-                    <a href="#" class="small text-decoration-none">Conoce más sobre Wynwood Points</a>
-                </div> {% endcomment %}
             </div>
         </div>
     </div>
